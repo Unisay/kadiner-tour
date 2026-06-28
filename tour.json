@@ -124,8 +124,8 @@
           "type": "scene",
           "sceneId": "scene05",
           "text": "In den Flur",
-          "targetYaw": 2.5,
-          "targetPitch": 1.8
+          "targetYaw": 2,
+          "targetPitch": 0.2
         },
         {
           "pitch": -4.6,
@@ -136,6 +136,14 @@
           "targetYaw": 54.8,
           "targetPitch": -0.7,
           "targetHfov": 110
+        },
+        {
+          "pitch": 2.7,
+          "yaw": -130.2,
+          "type": "scene",
+          "sceneId": "scene13",
+          "text": "Zum Wohnzimmer",
+          "targetYaw": "sameAzimuth"
         }
       ],
       "group": "Schlafzimmer",
@@ -208,6 +216,14 @@
           "targetYaw": 176.8,
           "targetPitch": 0.2,
           "targetHfov": 110
+        },
+        {
+          "pitch": -79.6,
+          "yaw": 5.6,
+          "type": "scene",
+          "sceneId": "scene05",
+          "text": "Zum Bad",
+          "targetYaw": "sameAzimuth"
         }
       ],
       "group": "Flur"
@@ -319,8 +335,8 @@
       "hfov": 110,
       "hotSpots": [
         {
-          "pitch": -5,
-          "yaw": -101,
+          "pitch": -10.2,
+          "yaw": -117.9,
           "type": "scene",
           "sceneId": "scene10",
           "text": "In die Wohnung",
@@ -329,40 +345,32 @@
           "targetHfov": 110
         },
         {
-          "pitch": -10.8,
-          "yaw": -118.9,
+          "pitch": -0.3,
+          "yaw": -96.1,
           "type": "scene",
-          "sceneId": "scene01",
-          "text": "Ins Schlafzimmer",
-          "targetYaw": 54.8,
-          "targetPitch": -0.7,
-          "targetHfov": 110
+          "sceneId": "scene13",
+          "text": "Zum Wohnzimmer",
+          "targetYaw": -1.3,
+          "targetPitch": -3.9
         },
         {
-          "pitch": -2.2,
-          "yaw": -94.6,
-          "type": "scene",
-          "sceneId": "scene15",
-          "text": "Ins Wohnzimmer",
-          "targetYaw": -10.2,
-          "targetPitch": 0.1,
-          "targetHfov": 110
-        },
-        {
-          "pitch": -4,
-          "yaw": 18,
-          "type": "info",
-          "text": "Treppe / Eingang"
-        },
-        {
-          "pitch": 2.5,
+          "pitch": 1.9,
           "yaw": 95.2,
           "type": "scene",
           "sceneId": "scene04",
-          "text": "",
+          "text": "Zum Schlafzimmer",
           "targetYaw": -88,
           "targetPitch": -0.5,
           "targetHfov": 110
+        },
+        {
+          "pitch": -46.2,
+          "yaw": 93.3,
+          "type": "scene",
+          "sceneId": "scene05",
+          "text": "Zum Bad",
+          "targetYaw": 25.8,
+          "targetPitch": -0.1
         }
       ],
       "group": "Diele",
@@ -730,6 +738,14 @@
           "text": "",
           "targetYaw": 111.3,
           "targetPitch": -2.9
+        },
+        {
+          "pitch": -5.4,
+          "yaw": 155.6,
+          "type": "scene",
+          "sceneId": "scene20",
+          "text": "Zur Terrasse",
+          "targetYaw": "sameAzimuth"
         }
       ],
       "group": "Wohnzimmer"

@@ -104,8 +104,8 @@
           "yaw": -128.7,
           "pitch": -20.7,
           "text": "In den Flur",
-          "targetYaw": 2.5,
-          "targetPitch": 1.8
+          "targetYaw": 2,
+          "targetPitch": 0.2
         },
         {
           "type": "scene",
@@ -113,6 +113,13 @@
           "yaw": -57.9,
           "pitch": -4.6,
           "text": "Zur Kommode"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene13",
+          "yaw": -130.2,
+          "pitch": 2.7,
+          "text": "Zum Wohnzimmer"
         }
       ]
     },
@@ -164,6 +171,13 @@
           "yaw": -97.2,
           "pitch": -0.4,
           "text": "Zum Eingang"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene05",
+          "yaw": 5.6,
+          "pitch": -79.6,
+          "text": "Zum Bad"
         }
       ]
     },
@@ -263,36 +277,34 @@
         {
           "type": "scene",
           "sceneId": "scene10",
-          "yaw": -101,
-          "pitch": -5,
+          "yaw": -117.9,
+          "pitch": -10.2,
           "text": "In die Wohnung"
         },
         {
           "type": "scene",
-          "sceneId": "scene01",
-          "yaw": -118.9,
-          "pitch": -10.8,
-          "text": "Ins Schlafzimmer"
-        },
-        {
-          "type": "scene",
-          "sceneId": "scene15",
-          "yaw": -94.6,
-          "pitch": -2.2,
-          "text": "Ins Wohnzimmer"
-        },
-        {
-          "type": "info",
-          "yaw": 18,
-          "pitch": -4,
-          "text": "Treppe / Eingang"
+          "sceneId": "scene13",
+          "yaw": -96.1,
+          "pitch": -0.3,
+          "text": "Zum Wohnzimmer",
+          "targetYaw": -1.3,
+          "targetPitch": -3.9
         },
         {
           "type": "scene",
           "sceneId": "scene04",
           "yaw": 95.2,
-          "pitch": 2.5,
-          "text": ""
+          "pitch": 1.9,
+          "text": "Zum Schlafzimmer"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene05",
+          "yaw": 93.3,
+          "pitch": -46.2,
+          "text": "Zum Bad",
+          "targetYaw": 25.8,
+          "targetPitch": -0.1
         }
       ]
     },
@@ -603,6 +615,13 @@
           "text": "",
           "targetYaw": 111.3,
           "targetPitch": -2.9
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene20",
+          "yaw": 155.6,
+          "pitch": -5.4,
+          "text": "Zur Terrasse"
         }
       ]
     },
