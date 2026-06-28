@@ -1,0 +1,15 @@
+# Original camera files — huge (~9 GB), keep out of git
+assets/
+
+# Inspection thumbnails + generated contact sheets
+thumbs/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Raw DNGs anywhere
+*.dng
+
+# Server-side scenes.json snapshots
+backups/

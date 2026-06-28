@@ -1,0 +1,651 @@
+{
+  "title": "Virtueller Rundgang — Wohnung Kadiner Straße",
+  "firstScene": "scene15",
+  "default": {
+    "autoLoad": true,
+    "hfov": 110,
+    "sceneFadeDuration": 800,
+    "compass": false
+  },
+  "_note": "Raumnamen, Anfangsblick (yaw/pitch) und hotspots sind ein ERSTER ENTWURF (aus den Vorschau-Panoramen geschaetzt) — Tuerrichtungen ggf. im Editor (?edit) feinjustieren. yaw/pitch der Szene = Blickrichtung beim Betreten. hotspot type 'scene' = Uebergang (sceneId), 'info' = Beschriftung (text). yaw 0 = Bildmitte, positiv = rechts; pitch positiv = nach oben.",
+  "scenes": [
+    {
+      "id": "scene01",
+      "title": "Schlafzimmer — Kommode",
+      "group": "Schlafzimmer",
+      "yaw": 54.8,
+      "pitch": -0.7,
+      "hfov": 110,
+      "fixedView": true,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene04",
+          "yaw": 169,
+          "pitch": -6,
+          "text": "Zum Ausgang"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene03",
+          "yaw": 7,
+          "pitch": -3,
+          "text": "Zum Fenster"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene02",
+          "yaw": -90,
+          "pitch": -3,
+          "text": "Weiter"
+        }
+      ]
+    },
+    {
+      "id": "scene02",
+      "title": "Schlafzimmer — Schränke",
+      "group": "Schlafzimmer",
+      "yaw": -18,
+      "pitch": 0,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene04",
+          "yaw": -18,
+          "pitch": -6,
+          "text": "Zum Ausgang"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene01",
+          "yaw": -162,
+          "pitch": -3,
+          "text": "Zur Kommode"
+        }
+      ]
+    },
+    {
+      "id": "scene03",
+      "title": "Schlafzimmer — Fenster",
+      "group": "Schlafzimmer",
+      "yaw": 142.7,
+      "pitch": 3.6,
+      "hfov": 110,
+      "fixedView": true,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene01",
+          "yaw": -177.8,
+          "pitch": -7.7,
+          "text": "Zur Kommode"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene04",
+          "yaw": 168.3,
+          "pitch": -3.7,
+          "text": "Zum Ausgang"
+        }
+      ]
+    },
+    {
+      "id": "scene04",
+      "title": "Schlafzimmer — Eingang (Kommode)",
+      "group": "Schlafzimmer",
+      "yaw": -88,
+      "pitch": -0.5,
+      "hfov": 110,
+      "fixedView": true,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene05",
+          "yaw": -128.7,
+          "pitch": -20.7,
+          "text": "In den Flur",
+          "targetYaw": 2.5,
+          "targetPitch": 1.8
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene01",
+          "yaw": -57.9,
+          "pitch": -4.6,
+          "text": "Zur Kommode"
+        }
+      ]
+    },
+    {
+      "id": "scene05",
+      "title": "Flur — am Bad",
+      "group": "Flur",
+      "yaw": -29,
+      "pitch": 0,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene06",
+          "yaw": 41.6,
+          "pitch": -23.3,
+          "text": "Ins Bad"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene15",
+          "yaw": -58.2,
+          "pitch": -1.6,
+          "text": "Ins Wohnzimmer"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene10",
+          "yaw": -66,
+          "pitch": -7.6,
+          "text": "In die Diele"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene08",
+          "yaw": 35.8,
+          "pitch": -7.8,
+          "text": "Zur Badewanne"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene04",
+          "yaw": 124.2,
+          "pitch": 3.3,
+          "text": "Zum Schlafzimmer"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene09",
+          "yaw": -97.2,
+          "pitch": -0.4,
+          "text": "Zum Eingang"
+        }
+      ]
+    },
+    {
+      "id": "scene06",
+      "title": "Bad — Übersicht",
+      "group": "Bad",
+      "yaw": 36.9,
+      "pitch": -1.4,
+      "hfov": 110,
+      "fixedView": true,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene05",
+          "yaw": -166,
+          "pitch": -6,
+          "text": "In den Flur",
+          "targetYaw": 77.6,
+          "targetPitch": -2.8
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene07",
+          "yaw": -36,
+          "pitch": -4,
+          "text": "Zur Badewanne"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene08",
+          "yaw": 0.9,
+          "pitch": -18.1,
+          "text": "Weiter (Bad)"
+        }
+      ]
+    },
+    {
+      "id": "scene07",
+      "title": "Bad — Badewanne",
+      "group": "Bad",
+      "yaw": -90,
+      "pitch": 0,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene05",
+          "yaw": 0,
+          "pitch": -6,
+          "text": "In den Flur"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene06",
+          "yaw": -29,
+          "pitch": -4,
+          "text": "Zu Dusche & WC"
+        }
+      ]
+    },
+    {
+      "id": "scene08",
+      "title": "Bad — Wanne & Stuhl",
+      "group": "Bad",
+      "yaw": -7.5,
+      "pitch": -0.3,
+      "hfov": 110,
+      "fixedView": true,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene06",
+          "yaw": -3.9,
+          "pitch": -30.6,
+          "text": "Übersicht",
+          "targetYaw": 163.4,
+          "targetPitch": -1.2
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene05",
+          "yaw": -4.3,
+          "pitch": -5,
+          "text": "In den Flur"
+        }
+      ]
+    },
+    {
+      "id": "scene09",
+      "title": "Diele — Eingang & Treppe",
+      "group": "Diele",
+      "yaw": 176.8,
+      "pitch": 0.2,
+      "hfov": 110,
+      "fixedView": true,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene10",
+          "yaw": -101,
+          "pitch": -5,
+          "text": "In die Wohnung"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene01",
+          "yaw": -118.9,
+          "pitch": -10.8,
+          "text": "Ins Schlafzimmer"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene15",
+          "yaw": -94.6,
+          "pitch": -2.2,
+          "text": "Ins Wohnzimmer"
+        },
+        {
+          "type": "info",
+          "yaw": 18,
+          "pitch": -4,
+          "text": "Treppe / Eingang"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene04",
+          "yaw": 95.2,
+          "pitch": 2.5,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "scene10",
+      "title": "Diele — zum Wohn-/Esszimmer",
+      "group": "Diele",
+      "yaw": 46.1,
+      "pitch": 0.5,
+      "hfov": 110,
+      "fixedView": true,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene15",
+          "yaw": -42,
+          "pitch": -5,
+          "text": "Ins Wohnzimmer"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene12",
+          "yaw": 45.9,
+          "pitch": -5.6,
+          "text": "In die Küche"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene09",
+          "yaw": -133,
+          "pitch": -5,
+          "text": "Zum Eingang"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene04",
+          "yaw": 132.7,
+          "pitch": 0.5,
+          "text": "Zum Schlafzimmer"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene09",
+          "yaw": 163.1,
+          "pitch": 0.1,
+          "text": ""
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene05",
+          "yaw": 113.7,
+          "pitch": 0.3,
+          "text": "",
+          "targetYaw": 38.9,
+          "targetPitch": -3.3
+        }
+      ]
+    },
+    {
+      "id": "scene12",
+      "title": "Küche & Esszimmer",
+      "group": "Küche & Esszimmer",
+      "yaw": 94.1,
+      "pitch": -8.1,
+      "hfov": 110,
+      "fixedView": true,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene10",
+          "yaw": 177.1,
+          "pitch": -9.2,
+          "text": "In die Diele",
+          "targetYaw": 145,
+          "targetPitch": -1.4
+        }
+      ]
+    },
+    {
+      "id": "scene13",
+      "title": "Diele — am Wohnzimmer",
+      "group": "Diele",
+      "yaw": -36,
+      "pitch": 0,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene15",
+          "yaw": -36,
+          "pitch": -5,
+          "text": "Ins Wohnzimmer"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene12",
+          "yaw": 96,
+          "pitch": -4.8,
+          "text": "In die Küche"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene10",
+          "yaw": 139.6,
+          "pitch": -30.8,
+          "text": "Weiter (Diele)"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene16",
+          "yaw": 10.2,
+          "pitch": -13.1,
+          "text": "Zur Galeriewand"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene04",
+          "yaw": 136.2,
+          "pitch": -3.6,
+          "text": "Zum Schlafzimmer"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene05",
+          "yaw": 123.1,
+          "pitch": -3.8,
+          "text": "In den Flur"
+        }
+      ]
+    },
+    {
+      "id": "scene15",
+      "title": "Wohnzimmer — Übersicht",
+      "group": "Wohnzimmer",
+      "yaw": -10.2,
+      "pitch": 0.1,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene16",
+          "yaw": -41.1,
+          "pitch": -16.7,
+          "text": "",
+          "targetYaw": -165.8,
+          "targetPitch": -0.5
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene13",
+          "yaw": 38,
+          "pitch": -10.1,
+          "text": "",
+          "targetYaw": 111.3,
+          "targetPitch": -0.4
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene18",
+          "yaw": -28.5,
+          "pitch": -8.8,
+          "text": "Zum Fenster",
+          "targetYaw": 176.4,
+          "targetPitch": -1.6
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene19",
+          "yaw": -50.1,
+          "pitch": -6.7,
+          "text": "Zur Terrasse"
+        }
+      ],
+      "hfov": 110,
+      "fixedView": true
+    },
+    {
+      "id": "scene16",
+      "title": "Wohnzimmer — Galeriewand",
+      "group": "Wohnzimmer",
+      "yaw": 0,
+      "pitch": 0,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene20",
+          "yaw": 170,
+          "pitch": -4.2,
+          "text": "Zur Terrasse",
+          "targetYaw": 61.6,
+          "targetPitch": -11.5
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene13",
+          "yaw": -29,
+          "pitch": -5,
+          "text": "Zum Flur",
+          "targetYaw": 113.1,
+          "targetPitch": -16.4
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene15",
+          "yaw": 1.9,
+          "pitch": -14.4,
+          "text": "Zur Übersicht",
+          "targetYaw": -10.2,
+          "targetPitch": 0.1
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene18",
+          "yaw": -135.8,
+          "pitch": -24.4,
+          "text": "Zum Fenster",
+          "targetYaw": 178.5,
+          "targetPitch": -1.8
+        }
+      ]
+    },
+    {
+      "id": "scene17",
+      "title": "Wohnzimmer — Sofa",
+      "group": "Wohnzimmer",
+      "yaw": 0,
+      "pitch": 0,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene20",
+          "yaw": 162,
+          "pitch": -5,
+          "text": "Zur Terrasse"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene13",
+          "yaw": -29,
+          "pitch": -5,
+          "text": "Zum Flur"
+        }
+      ]
+    },
+    {
+      "id": "scene18",
+      "title": "Wohnzimmer — am Fenster",
+      "group": "Wohnzimmer",
+      "yaw": 60,
+      "pitch": 0,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene19",
+          "yaw": 84.2,
+          "pitch": -10.3,
+          "text": "",
+          "targetYaw": 151.5,
+          "targetPitch": 0.6
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene16",
+          "yaw": 40.7,
+          "pitch": -27.9,
+          "text": ""
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene15",
+          "yaw": 12.9,
+          "pitch": -10,
+          "text": ""
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene13",
+          "yaw": -12,
+          "pitch": -5.2,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "scene19",
+      "title": "Wohnzimmer — an der Terrassentür",
+      "group": "Wohnzimmer",
+      "yaw": 108,
+      "pitch": 0,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene15",
+          "yaw": -28.2,
+          "pitch": -4.6,
+          "text": ""
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene16",
+          "yaw": -40.1,
+          "pitch": -24.2,
+          "text": ""
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene13",
+          "yaw": -53.9,
+          "pitch": -1.7,
+          "text": "",
+          "targetYaw": 111.3,
+          "targetPitch": -2.9
+        }
+      ]
+    },
+    {
+      "id": "scene20",
+      "title": "Terrasse",
+      "group": "Terrasse",
+      "yaw": -90,
+      "pitch": 5,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene19",
+          "yaw": 101,
+          "pitch": -6,
+          "text": "Zurück ins Wohnzimmer",
+          "targetYaw": -41.6,
+          "targetPitch": -1.6
+        }
+      ]
+    },
+    {
+      "id": "scene21",
+      "title": "Wohnzimmer — Erker",
+      "group": "Wohnzimmer",
+      "yaw": -36,
+      "pitch": 0,
+      "hotspots": [
+        {
+          "type": "scene",
+          "sceneId": "scene20",
+          "yaw": 108,
+          "pitch": -5,
+          "text": "Zur Terrasse"
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene16",
+          "yaw": -36,
+          "pitch": -3,
+          "text": "Ins Wohnzimmer"
+        }
+      ]
+    }
+  ]
+}

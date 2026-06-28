@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Virtueller Rundgang — Wohnung Kadiner Straße</title>
+  <link rel="stylesheet" href="vendor/pannellum.css">
+  <style>
+    html, body { margin: 0; height: 100%; background: #000; font-family: system-ui, sans-serif; }
+    #panorama { width: 100%; height: 100%; }
+
+    #title {
+      position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+      z-index: 10; color: #fff; background: rgba(0,0,0,.45);
+      padding: 6px 14px; border-radius: 999px; font-size: 15px;
+      pointer-events: none; backdrop-filter: blur(4px);
+    }
+
+    /* Room navigation menu */
+    #menu-toggle {
+      position: fixed; top: 12px; left: 12px; z-index: 12;
+      background: rgba(0,0,0,.55); color: #fff; border: 1px solid #555;
+      border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 13px;
+      backdrop-filter: blur(4px);
+    }
+    #menu {
+      position: fixed; top: 52px; left: 12px; z-index: 12; width: 230px;
+      max-height: calc(100% - 80px); overflow-y: auto; display: none;
+      background: rgba(20,20,20,.92); color: #eee; border: 1px solid #555;
+      border-radius: 10px; padding: 8px; font-size: 13px; backdrop-filter: blur(4px);
+    }
+    #menu.on { display: block; }
+    #nav-back {
+      position: fixed; bottom: 12px; left: 12px; z-index: 12; display: none;
+      background: rgba(0,0,0,.55); color: #fff; border: 1px solid #555;
+      border-radius: 8px; padding: 8px 14px; cursor: pointer; font-size: 14px;
+      backdrop-filter: blur(4px);
+    }
+    #nav-back.on { display: block; }
+    #hs-del {
+      position: fixed; z-index: 20; display: none; width: 22px; height: 22px;
+      line-height: 22px; text-align: center; border-radius: 50%; cursor: pointer;
+      background: #b22; color: #fff; font-size: 13px; font-weight: 700;
+      box-shadow: 0 1px 4px rgba(0,0,0,.6); user-select: none;
+    }
+    #hs-del:hover { background: #e33; }
+    #menu .grp { color: #9cf; font-weight: 600; margin: 8px 6px 2px; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+    #menu a { display: block; padding: 6px 8px; color: #eee; text-decoration: none; border-radius: 6px; cursor: pointer; }
+    #menu a:hover { background: #2a2a2a; }
+    #menu a.active { background: #2b4a6b; color: #fff; }
+
+    /* center crosshair, only in edit mode */
+    #crosshair { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      z-index: 10; display: none; pointer-events: none; color: #ff0; font-size: 22px;
+      text-shadow: 0 0 3px #000; }
+    #crosshair.on { display: block; }
+
+    /* Authoring panel */
+    #edit-toggle {
+      position: fixed; bottom: 12px; right: 12px; z-index: 11;
+      background: rgba(0,0,0,.55); color: #fff; border: 1px solid #555;
+      border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 13px;
+    }
+    #edit-panel {
+      position: fixed; bottom: 56px; right: 12px; z-index: 11; width: 330px;
+      max-height: calc(100% - 80px); overflow-y: auto;
+      background: rgba(20,20,20,.94); color: #eee; border: 1px solid #555;
+      border-radius: 10px; padding: 12px; display: none; font-size: 13px;
+    }
+    #edit-panel.on { display: block; }
+    #edit-panel h3 { margin: 0 0 8px; font-size: 13px; color: #9cf; }
+    #edit-panel button { margin: 3px 4px 3px 0; padding: 5px 9px; cursor: pointer;
+      background: #2a2a2a; color: #eee; border: 1px solid #555; border-radius: 6px; font-size: 12px; }
+    #edit-panel select, #edit-panel input { background: #111; color: #eee; border: 1px solid #555;
+      border-radius: 5px; padding: 3px; font-size: 12px; max-width: 180px; }
+    #edit-panel label { display: inline-block; margin: 3px 0; }
+    #readout { font-family: ui-monospace, monospace; font-size: 12px; color: #9f9; margin: 6px 0; }
+    .hint { color: #999; font-size: 11px; margin: 4px 0; }
+    #existing { margin: 4px 0 6px; max-height: 150px; overflow-y: auto; font-size: 12px; }
+    #existing .ex-row { display: flex; justify-content: space-between; align-items: center; gap: 6px; padding: 2px 0; }
+    #existing .ex-row span { color: #cde; font-family: ui-monospace, monospace; flex: 1; }
+    #existing .ex-row button { margin: 0; padding: 1px 7px; }
+    #existing .ex-row .del { background: #4a1f1f; border-color: #844; }
+    #save-status { font-size: 12px; margin: 6px 0; min-height: 16px; }
+    #save-status.dirty { color: #fc6; }
+    #save-status.saving { color: #9cf; }
+    #save-status.ok { color: #9f9; }
+    #save-status.err { color: #f88; }
+    #save-now { background: #244a2b; border-color: #486; }
+  </style>
+</head>
+<body>
+  <div id="panorama"></div>
+  <div id="title"></div>
+  <div id="crosshair">＋</div>
+
+  <button id="menu-toggle">☰ Räume</button>
+  <nav id="menu"></nav>
+  <button id="nav-back" title="Zurück">← Zurück</button>
+  <div id="hs-del" title="удалить стрелку">✕</div>
+
+  <button id="edit-toggle">✎ Правка</button>
+  <div id="edit-panel">
+    <h3>Редактор тура</h3>
+    <div class="hint">Перетаскивай маркеры мышью — позиция сохраняется автоматически.
+      Кнопки — для остального. Центр (＋) = текущая точка для «добавить».</div>
+    <div id="readout">—</div>
+
+    <label>Подпись: <input id="hs-label" placeholder="напр. Zum Flur"></label><br>
+    <label>Перейти в: <select id="target-scene"></select></label>
+    <button id="add-link">＋ переход здесь</button>
+    <button id="add-info">ℹ инфо здесь</button><br>
+
+    <label>🎯 Угол прихода СЮДА из: <select id="from-scene"></select></label>
+    <button id="set-arrival">запомнить угол</button><br>
+
+    <button id="fix-view">📌 зафиксировать угол сцены</button>
+    <button id="unfix-view">открепить</button>
+
+    <div style="margin-top:8px"><b>Переходы в этой сцене</b> (⊙ — сюда, ✕ — удалить):</div>
+    <div id="existing"></div>
+
+    <div id="save-status"></div>
+    <button id="save-now">💾 Сохранить сейчас</button>
+  </div>
+
+  <script src="vendor/pannellum.js"></script>
+  <script>
+    const editMode = /(?:^|[?&])edit\b/.test(location.search);
+    const $ = id => document.getElementById(id);
+    let viewer, config, src;
+    let saveTimer = null;
+    let linkEls = {};
+    let curScene = null, prevScene = null;   // prevScene = where we came from
+
+    const srcScene = id => src && src.scenes.find(s => s.id === id);
+
+    // ---- compile scenes.json -> Pannellum config (mirror of scripts/build-tour.py) ----
+    function compile(s) {
+      const fixed = {};
+      for (const sc of s.scenes) if (sc.fixedView) fixed[sc.id] = sc;
+      const def = Object.assign({}, s.default || {});
+      def.firstScene = def.firstScene || s.firstScene || s.scenes[0].id;
+      const out = { default: def, scenes: {} };
+      for (const sc of s.scenes) {
+        const scene = {
+          type: 'equirectangular',
+          panorama: 'images/' + sc.id + '.jpg',
+          title: sc.title || sc.id,
+          yaw: sc.yaw || 0, pitch: sc.pitch || 0,
+          hfov: sc.hfov || (s.default && s.default.hfov) || 110,
+        };
+        if (sc.group) scene.group = sc.group;
+        if (sc.fixedView) scene.fixedView = true;
+        const hs = [];
+        for (const h of (sc.hotspots || [])) {
+          const o = { yaw: h.yaw, pitch: h.pitch, type: h.type || 'scene' };
+          if (o.type === 'scene') {
+            o.sceneId = h.sceneId;
+            o.text = h.text || '';   // "→ dest" suffix appended after the full pass (edit mode)
+            if (fixed[h.sceneId]) {
+              const ft = fixed[h.sceneId];
+              o.targetYaw = ft.yaw || 0; o.targetPitch = ft.pitch || 0;
+              if ('hfov' in ft) o.targetHfov = ft.hfov;
+            } else {
+              o.targetYaw = ('targetYaw' in h) ? h.targetYaw : 'sameAzimuth';
+              if ('targetPitch' in h) o.targetPitch = h.targetPitch;
+            }
+          } else {
+            o.text = h.text || '';
+          }
+          hs.push(o);
+        }
+        if (hs.length) scene.hotSpots = hs;
+        out.scenes[sc.id] = scene;
+      }
+      // in edit mode, append "→ destination title" to each scene-hotspot tooltip
+      if (editMode) {
+        for (const id in out.scenes) {
+          for (const h of (out.scenes[id].hotSpots || [])) {
+            if (h.type === 'scene' && out.scenes[h.sceneId]) {
+              h.text = (h.text ? h.text + '  ' : '') + '→ ' + out.scenes[h.sceneId].title;
+            }
+          }
+        }
+      }
+      return out;
+    }
+
+    // ---- save ----
+    function setStatus(t, c) { const e = $('save-status'); if (e) { e.textContent = t; e.className = c || ''; } }
+    function scheduleSave() { setStatus('● не сохранено', 'dirty'); clearTimeout(saveTimer); saveTimer = setTimeout(saveNow, 600); }
+    async function saveNow() {
+      if (!src) return;
+      clearTimeout(saveTimer);
+      setStatus('сохранение…', 'saving');
+      try {
+        const r = await fetch('/api/save', { method: 'POST',
+          headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(src) });
+        const j = await r.json();
+        if (j.ok) setStatus('сохранено ✓', 'ok');
+        else setStatus('ошибка сборки: ' + (j.stderr || j.error || ''), 'err');
+      } catch (e) { setStatus('ошибка сети: ' + e.message, 'err'); }
+    }
+
+    // ---- menu + titles (both modes) ----
+    function buildMenu() {
+      const menu = $('menu'); menu.innerHTML = ''; linkEls = {};
+      const groups = {};
+      for (const id of Object.keys(config.scenes)) {
+        const g = config.scenes[id].group || 'Räume';
+        (groups[g] = groups[g] || []).push(id);
+      }
+      for (const g of Object.keys(groups)) {
+        const h = document.createElement('div'); h.className = 'grp'; h.textContent = g; menu.appendChild(h);
+        for (const id of groups[g]) {
+          const a = document.createElement('a');
+          a.textContent = config.scenes[id].title || id;
+          a.addEventListener('click', () => { viewer.loadScene(id); menu.classList.remove('on'); });
+          menu.appendChild(a); linkEls[id] = a;
+        }
+      }
+    }
+    function updateTitle() {
+      const cur = viewer.getScene();
+      if (cur !== curScene) { prevScene = curScene; curScene = cur; }
+      const s = config.scenes[cur];
+      $('title').textContent = s && s.title ? s.title : cur;
+      for (const id in linkEls) linkEls[id].classList.toggle('active', id === cur);
+      if (editMode) { renderExisting(); refreshFromScene(); }
+    }
+
+    // ---- viewer lifecycle ----
+    let suppressHistory = false;
+    function syncHistory(push) {
+      const cur = viewer.getScene();
+      if (push) history.pushState({ scene: cur }, '', '#' + cur);
+      else history.replaceState({ scene: cur }, '', '#' + cur);
+    }
+    function initViewer(cfg) {
+      config = cfg;
+      viewer = pannellum.viewer('panorama', cfg);
+      buildMenu();
+      viewer.on('load', () => {
+        updateTitle();
+        if (!history.state) syncHistory(false);   // record first scene
+        if (editMode) attachDrag();
+      });
+      viewer.on('scenechange', () => {
+        updateTitle();
+        if (suppressHistory) suppressHistory = false;          // navigated via browser/back button
+        else { syncHistory(true); $('nav-back').classList.add('on'); }
+      });
+      updateTitle();
+    }
+    // recompile src and reload the viewer, keeping the current scene + view
+    function reinit() {
+      const cur = viewer.getScene(), p = viewer.getPitch(), y = viewer.getYaw(), h = viewer.getHfov();
+      const cfg = compile(src);
+      cfg.default.firstScene = cur;
+      if (cfg.scenes[cur]) { cfg.scenes[cur].yaw = y; cfg.scenes[cur].pitch = p; cfg.scenes[cur].hfov = h; }
+      viewer.destroy();
+      initViewer(cfg);
+    }
+
+    // ---- edit-only UI ----
+    function readout() {
+      if (!editMode || !$('edit-panel').classList.contains('on')) return;
+      const cur = viewer.getScene();
+      $('readout').textContent = cur + (config.scenes[cur].fixedView ? ' 📌' : '') +
+        '  y' + viewer.getYaw().toFixed(1) + ' p' + viewer.getPitch().toFixed(1) +
+        ' hfov' + viewer.getHfov().toFixed(0);
+    }
+    function renderExisting() {
+      const wrap = $('existing'); if (!wrap || !src || !viewer) return;
+      const sc = srcScene(viewer.getScene()); const list = (sc && sc.hotspots) || [];
+      wrap.innerHTML = '';
+      if (!list.length) { wrap.textContent = '— нет —'; return; }
+      list.forEach((h, i) => {
+        const row = document.createElement('div'); row.className = 'ex-row';
+        const dest = h.type === 'scene'
+          ? ((config.scenes[h.sceneId] || {}).title || h.sceneId) : ('info: ' + (h.text || ''));
+        const span = document.createElement('span');
+        span.textContent = (h.text && h.type === 'scene' ? h.text + ' ' : '') + '→ ' + dest +
+          '  [y' + Math.round(h.yaw) + ' p' + Math.round(h.pitch) + ']';
+        const mv = document.createElement('button'); mv.textContent = '⊙'; mv.title = 'переместить в центр вида';
+        mv.onclick = () => { h.yaw = +viewer.getYaw().toFixed(1); h.pitch = +viewer.getPitch().toFixed(1); reinit(); scheduleSave(); };
+        const del = document.createElement('button'); del.textContent = '✕'; del.className = 'del'; del.title = 'удалить';
+        del.onclick = () => delHotspot(i);
+        row.appendChild(span); row.appendChild(mv); row.appendChild(del);
+        wrap.appendChild(row);
+      });
+    }
+    function refreshFromScene() {
+      const sel = $('from-scene'); if (!sel || !src || !viewer) return;
+      const cur = viewer.getScene(); sel.innerHTML = ''; const opts = [];
+      for (const s of src.scenes) {
+        if ((s.hotspots || []).some(h => h.sceneId === cur)) {
+          const o = document.createElement('option'); o.value = s.id;
+          o.textContent = (config.scenes[s.id] || {}).title || s.id; sel.appendChild(o); opts.push(s.id);
+        }
+      }
+      if (!opts.length) { const o = document.createElement('option'); o.value = ''; o.textContent = '(нет входящих)'; sel.appendChild(o); return; }
+      // default to where we came from (previous scene), if it links here
+      if (prevScene && opts.includes(prevScene)) sel.value = prevScene;
+    }
+
+    // ---- marker editing: Ctrl+drag to move, Shift/Alt+click or hover-✕ to delete ----
+    let delIdx = -1, delTimer = null;
+    function hotspotIndex(el) {
+      const live = (viewer.getConfig().hotSpots) || [];
+      for (let i = 0; i < live.length; i++) if (live[i].div === el) return i;
+      return -1;
+    }
+    function delHotspot(i) {
+      const sc = srcScene(viewer.getScene()); if (!sc || i < 0 || !sc.hotspots[i]) return;
+      const h = sc.hotspots[i];
+      const label = h.type === 'scene'
+        ? ('→ ' + ((config.scenes[h.sceneId] || {}).title || h.sceneId))
+        : ('инфо «' + (h.text || '') + '»');
+      if (!confirm('Удалить стрелку ' + label + '?')) return;
+      sc.hotspots.splice(i, 1); reinit(); scheduleSave();
+    }
+    function showDel(el, i) {
+      clearTimeout(delTimer);
+      const r = el.getBoundingClientRect(), b = $('hs-del');
+      b.style.left = (r.right - 10) + 'px'; b.style.top = (r.top - 10) + 'px';
+      b.style.display = 'block'; delIdx = i;
+    }
+    function hideDelSoon() { delTimer = setTimeout(() => { $('hs-del').style.display = 'none'; }, 250); }
+
+    // per-scene (markers are recreated on each load): hover -> delete badge
+    function attachDrag() {
+      const live = (viewer.getConfig().hotSpots) || [];
+      live.forEach((hs, i) => {
+        const el = hs.div; if (!el || el._wired) return; el._wired = true;
+        el.title = 'Ctrl+тащить — двигать · Shift/Alt+клик — удалить · наведи для ✕';
+        el.addEventListener('mouseenter', () => showDel(el, i));
+        el.addEventListener('mouseleave', hideDelSoon);
+      });
+      wireMarkerInteractions();
+    }
+    // once on the container: capture phase beats Pannellum's own handlers
+    function wireMarkerInteractions() {
+      const cont = $('panorama'); if (cont._mi) return; cont._mi = true;
+      const bd = $('hs-del');
+      bd.addEventListener('mouseenter', () => clearTimeout(delTimer));
+      bd.addEventListener('mouseleave', hideDelSoon);
+      bd.addEventListener('click', () => { const i = delIdx; bd.style.display = 'none'; delHotspot(i); });
+      cont.addEventListener('mousedown', ev => {
+        if (!ev.ctrlKey) return;                                   // plain drag pans the scene
+        const el = ev.target.closest && ev.target.closest('.pnlm-hotspot'); if (!el) return;
+        const i = hotspotIndex(el); if (i < 0) return;
+        ev.preventDefault(); ev.stopPropagation();
+        startDrag(i, el, viewer.getConfig().hotSpots[i]);
+      }, true);
+      cont.addEventListener('click', ev => {
+        const el = ev.target.closest && ev.target.closest('.pnlm-hotspot'); if (!el) return;
+        if (el._dragged) { el._dragged = false; ev.preventDefault(); ev.stopPropagation(); return; }
+        if (ev.shiftKey || ev.altKey) { ev.preventDefault(); ev.stopPropagation(); delHotspot(hotspotIndex(el)); }
+      }, true);
+    }
+    function startDrag(i, el, hs) {
+      const sc = srcScene(viewer.getScene()); const h = sc && sc.hotspots[i]; if (!h || !hs) return;
+      $('hs-del').style.display = 'none';
+      const onMove = ev => {
+        el._dragged = true;
+        const c = viewer.mouseEventToCoords(ev);   // [pitch, yaw]
+        h.pitch = +c[0].toFixed(1); h.yaw = +c[1].toFixed(1);
+        hs.pitch = h.pitch; hs.yaw = h.yaw;
+        viewer.lookAt(viewer.getPitch(), viewer.getYaw(), viewer.getHfov(), 0); // force reposition
+      };
+      const onUp = () => {
+        document.removeEventListener('mousemove', onMove, true);
+        document.removeEventListener('mouseup', onUp, true);
+        renderExisting(); scheduleSave();
+      };
+      document.addEventListener('mousemove', onMove, true);
+      document.addEventListener('mouseup', onUp, true);
+    }
+
+    // ---- load ----
+    (editMode
+      ? fetch('scenes.json?_=' + Date.now()).then(r => r.json()).then(s => { src = s; return compile(s); })
+      : fetch('tour.json?_=' + Date.now()).then(r => r.json())
+    ).then(cfg => {
+      const hash = location.hash.slice(1);
+      if (hash && cfg.scenes[hash]) cfg.default.firstScene = hash;   // restore scene on reload
+      initViewer(cfg);
+      window.addEventListener('popstate', e => {
+        const t = e.state && e.state.scene;
+        if (t && config.scenes[t] && t !== viewer.getScene()) { suppressHistory = true; viewer.loadScene(t); }
+      });
+      $('nav-back').addEventListener('click', () => history.back());
+      $('menu-toggle').addEventListener('click', () => $('menu').classList.toggle('on'));
+      if (editMode) wireEditor(); else $('edit-toggle').style.display = 'none';
+    }).catch(e => {
+      $('title').textContent = 'Konnte nicht laden — bitte über den lokalen Server öffnen (just serve)';
+      console.error(e);
+    });
+
+    function wireEditor() {
+      // populate target dropdown once
+      const tsel = $('target-scene');
+      for (const s of src.scenes) {
+        const o = document.createElement('option'); o.value = s.id;
+        o.textContent = s.title || s.id; tsel.appendChild(o);
+      }
+      $('edit-toggle').addEventListener('click', () => {
+        $('edit-panel').classList.toggle('on'); $('crosshair').classList.toggle('on'); readout();
+      });
+      setInterval(readout, 150);
+
+      const center = () => ({ yaw: +viewer.getYaw().toFixed(1), pitch: +viewer.getPitch().toFixed(1) });
+      $('add-link').addEventListener('click', () => {
+        const sc = srcScene(viewer.getScene()); sc.hotspots = sc.hotspots || [];
+        const c = center();
+        sc.hotspots.push({ type: 'scene', sceneId: $('target-scene').value,
+          yaw: c.yaw, pitch: c.pitch, text: $('hs-label').value || '' });
+        reinit(); scheduleSave();
+      });
+      $('add-info').addEventListener('click', () => {
+        const sc = srcScene(viewer.getScene()); sc.hotspots = sc.hotspots || [];
+        const c = center();
+        sc.hotspots.push({ type: 'info', yaw: c.yaw, pitch: c.pitch, text: $('hs-label').value || 'Info' });
+        reinit(); scheduleSave();
+      });
+      $('set-arrival').addEventListener('click', () => {
+        const from = $('from-scene').value; if (!from) return;
+        const to = viewer.getScene(); const fs = srcScene(from);
+        const h = (fs.hotspots || []).find(x => x.sceneId === to); if (!h) return;
+        h.targetYaw = +viewer.getYaw().toFixed(1); h.targetPitch = +viewer.getPitch().toFixed(1);
+        reinit(); scheduleSave();
+      });
+      $('fix-view').addEventListener('click', () => {
+        const sc = srcScene(viewer.getScene());
+        sc.yaw = +viewer.getYaw().toFixed(1); sc.pitch = +viewer.getPitch().toFixed(1);
+        sc.hfov = +viewer.getHfov().toFixed(0); sc.fixedView = true;
+        reinit(); scheduleSave();
+      });
+      $('unfix-view').addEventListener('click', () => {
+        const sc = srcScene(viewer.getScene()); delete sc.fixedView; reinit(); scheduleSave();
+      });
+      $('save-now').addEventListener('click', saveNow);
+    }
+  </script>
+</body>
+</html>
