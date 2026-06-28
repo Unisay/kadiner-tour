@@ -119,7 +119,16 @@
           "sceneId": "scene13",
           "yaw": -130.2,
           "pitch": 2.7,
-          "text": "Zum Wohnzimmer"
+          "text": "Zum Wohnzimmer",
+          "targetYaw": -7.8,
+          "targetPitch": -1.9
+        },
+        {
+          "type": "scene",
+          "sceneId": "scene03",
+          "yaw": -38.2,
+          "pitch": -3.3,
+          "text": "Zum Fenster"
         }
       ]
     },
@@ -473,7 +482,9 @@
           "sceneId": "scene19",
           "yaw": -50.1,
           "pitch": -6.7,
-          "text": "Zur Terrasse"
+          "text": "Zur Terrasse",
+          "targetYaw": 157.5,
+          "targetPitch": -7.9
         }
       ],
       "hfov": 110,

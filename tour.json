@@ -143,7 +143,18 @@
           "type": "scene",
           "sceneId": "scene13",
           "text": "Zum Wohnzimmer",
-          "targetYaw": "sameAzimuth"
+          "targetYaw": -7.8,
+          "targetPitch": -1.9
+        },
+        {
+          "pitch": -3.3,
+          "yaw": -38.2,
+          "type": "scene",
+          "sceneId": "scene03",
+          "text": "Zum Fenster",
+          "targetYaw": 142.7,
+          "targetPitch": 3.6,
+          "targetHfov": 110
         }
       ],
       "group": "Schlafzimmer",
@@ -577,7 +588,8 @@
           "type": "scene",
           "sceneId": "scene19",
           "text": "Zur Terrasse",
-          "targetYaw": "sameAzimuth"
+          "targetYaw": 157.5,
+          "targetPitch": -7.9
         }
       ],
       "group": "Wohnzimmer",
