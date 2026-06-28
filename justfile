@@ -30,6 +30,12 @@ serve-static:
     @echo "http://localhost:8000/"
     python3 -m http.server 8000
 
+# Commit the current tour and push to GitHub Pages (https://cv.functional.work/kadiner-tour/)
+publish msg="update tour":
+    git add -A
+    git commit -m "{{msg}}" || echo "nothing to commit"
+    git push
+
 # Rebuild labeled contact sheets of all panoramas into thumbs/_sheet_*.jpg
 sheets:
     nix-shell -p imagemagick --run 'montage thumbs/scene*.jpg -tile 2x -geometry 760x380+4+4 -label "%t" -pointsize 26 -background black -fill yellow thumbs/_sheet.jpg'

@@ -93,7 +93,19 @@ targetHfov` всем входящим стрелкам (перекрывая `sa
 
 ## Публикация
 
-Статика — кладётся куда угодно. Через ekdos:
+Тур опубликован на **GitHub Pages**: https://cv.functional.work/kadiner-tour/
+(репозиторий https://github.com/Unisay/kadiner-tour, ветка `main`, корень).
+
+Обновить онлайн после правок в `?edit` (которые пишут `scenes.json` + пересобирают
+`tour.json` локально):
+```
+just publish              # git add -A + commit + push  -> Pages пересоберётся за ~1 мин
+just publish "msg"        # со своим сообщением коммита
+```
+В публикацию не идут `assets/` (оригиналы 9 ГБ), `thumbs/`, `backups/` (см. `.gitignore`).
+Публичный сайт грузит только `tour.json` (read-only); backend/`serve.py` нужен лишь локально.
+
+### Альтернатива — ekdos
 ```
 /ekdos:publish index.html   # либо опубликовать всю папку — см. /ekdos:publish
 ```
