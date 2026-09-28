@@ -482,7 +482,7 @@
           "sceneId": "scene19",
           "yaw": -50.1,
           "pitch": -6.7,
-          "text": "Zur Terrasse",
+          "text": "Zum Balkon",
           "targetYaw": 157.5,
           "targetPitch": -7.9
         }
@@ -502,7 +502,7 @@
           "sceneId": "scene20",
           "yaw": 170,
           "pitch": -4.2,
-          "text": "Zur Terrasse",
+          "text": "Zum Balkon",
           "targetYaw": 61.6,
           "targetPitch": -11.5
         },
@@ -547,7 +547,7 @@
           "sceneId": "scene20",
           "yaw": 162,
           "pitch": -5,
-          "text": "Zur Terrasse"
+          "text": "Zum Balkon"
         },
         {
           "type": "scene",
@@ -599,7 +599,7 @@
     },
     {
       "id": "scene19",
-      "title": "Wohnzimmer — an der Terrassentür",
+      "title": "Wohnzimmer — an der Balkontür",
       "group": "Wohnzimmer",
       "yaw": 108,
       "pitch": 0,
@@ -632,14 +632,14 @@
           "sceneId": "scene20",
           "yaw": 155.6,
           "pitch": -5.4,
-          "text": "Zur Terrasse"
+          "text": "Zum Balkon"
         }
       ]
     },
     {
       "id": "scene20",
-      "title": "Terrasse",
-      "group": "Terrasse",
+      "title": "Balkon",
+      "group": "Balkon",
       "yaw": -90,
       "pitch": 5,
       "hotspots": [
@@ -666,7 +666,7 @@
           "sceneId": "scene20",
           "yaw": 108,
           "pitch": -5,
-          "text": "Zur Terrasse"
+          "text": "Zum Balkon"
         },
         {
           "type": "scene",

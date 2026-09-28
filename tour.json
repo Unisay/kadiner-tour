@@ -587,7 +587,7 @@
           "yaw": -50.1,
           "type": "scene",
           "sceneId": "scene19",
-          "text": "Zur Terrasse",
+          "text": "Zum Balkon",
           "targetYaw": 157.5,
           "targetPitch": -7.9
         }
@@ -608,7 +608,7 @@
           "yaw": 170,
           "type": "scene",
           "sceneId": "scene20",
-          "text": "Zur Terrasse",
+          "text": "Zum Balkon",
           "targetYaw": 61.6,
           "targetPitch": -11.5
         },
@@ -656,7 +656,7 @@
           "yaw": 162,
           "type": "scene",
           "sceneId": "scene20",
-          "text": "Zur Terrasse",
+          "text": "Zum Balkon",
           "targetYaw": "sameAzimuth"
         },
         {
@@ -719,7 +719,7 @@
     "scene19": {
       "type": "equirectangular",
       "panorama": "images/scene19.jpg",
-      "title": "Wohnzimmer — an der Terrassentür",
+      "title": "Wohnzimmer — an der Balkontür",
       "yaw": 108,
       "pitch": 0,
       "hfov": 110,
@@ -756,7 +756,7 @@
           "yaw": 155.6,
           "type": "scene",
           "sceneId": "scene20",
-          "text": "Zur Terrasse",
+          "text": "Zum Balkon",
           "targetYaw": "sameAzimuth"
         }
       ],
@@ -765,7 +765,7 @@
     "scene20": {
       "type": "equirectangular",
       "panorama": "images/scene20.jpg",
-      "title": "Terrasse",
+      "title": "Balkon",
       "yaw": -90,
       "pitch": 5,
       "hfov": 110,
@@ -780,7 +780,7 @@
           "targetPitch": -1.6
         }
       ],
-      "group": "Terrasse"
+      "group": "Balkon"
     },
     "scene21": {
       "type": "equirectangular",
@@ -795,7 +795,7 @@
           "yaw": 108,
           "type": "scene",
           "sceneId": "scene20",
-          "text": "Zur Terrasse",
+          "text": "Zum Balkon",
           "targetYaw": "sameAzimuth"
         },
         {
