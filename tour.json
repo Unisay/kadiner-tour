@@ -785,7 +785,7 @@
     "scene21": {
       "type": "equirectangular",
       "panorama": "images/scene21.jpg",
-      "title": "Wohnzimmer — Erker",
+      "title": "Wohnzimmer — Fensternische",
       "yaw": -36,
       "pitch": 0,
       "hfov": 110,
