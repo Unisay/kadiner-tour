@@ -132,12 +132,18 @@
     const UMAMI_ID = '496cf3ed-7c3b-400d-a6fb-4047866bd031';
     const trackOn = !editMode && location.hostname === 'tour.functional.work';
     const pendingRooms = [];
+    const params = new URLSearchParams(location.search);
+    // ?notrack opened once excludes this browser for good (the tracker honours localStorage 'umami.disabled'); ?track undoes it
+    try {
+      if (params.has('notrack')) localStorage.setItem('umami.disabled', '1');
+      if (params.has('track')) localStorage.removeItem('umami.disabled');
+    } catch (e) {}
     if (trackOn) {
       const s = document.createElement('script');
       s.defer = true; s.src = 'https://cloud.umami.is/script.js';
       s.dataset.websiteId = UMAMI_ID;
       s.dataset.excludeHash = 'true';   // a scene change updates #hash; count it as an event, not a pageview
-      const k = new URLSearchParams(location.search).get('k');
+      const k = params.get('k');
       if (k) s.dataset.distinctId = k;
       s.onload = () => { for (const t of pendingRooms.splice(0)) umami.track(t); };
       document.head.appendChild(s);
