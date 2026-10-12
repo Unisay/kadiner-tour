@@ -127,6 +127,27 @@
 
     const srcScene = id => src && src.scenes.find(s => s.id === id);
 
+    // ---- visitor stats: Umami Cloud, only on the published domain ----
+    // ?k=<code> in a personal link becomes the Umami distinct ID; every room opened is an event.
+    const UMAMI_ID = '496cf3ed-7c3b-400d-a6fb-4047866bd031';
+    const trackOn = !editMode && location.hostname === 'tour.functional.work';
+    const pendingRooms = [];
+    if (trackOn) {
+      const s = document.createElement('script');
+      s.defer = true; s.src = 'https://cloud.umami.is/script.js';
+      s.dataset.websiteId = UMAMI_ID;
+      s.dataset.excludeHash = 'true';   // a scene change updates #hash; count it as an event, not a pageview
+      const k = new URLSearchParams(location.search).get('k');
+      if (k) s.dataset.distinctId = k;
+      s.onload = () => { for (const t of pendingRooms.splice(0)) umami.track(t); };
+      document.head.appendChild(s);
+    }
+    function trackRoom() {
+      if (!trackOn) return;
+      const s = config.scenes[viewer.getScene()]; const t = s && s.title; if (!t) return;
+      if (window.umami) umami.track(t); else pendingRooms.push(t);
+    }
+
     // ---- compile scenes.json -> Pannellum config (mirror of scripts/build-tour.py) ----
     function compile(s) {
       const fixed = {};
@@ -235,6 +256,7 @@
       buildMenu();
       viewer.on('load', () => {
         updateTitle();
+        trackRoom();
         if (!history.state) syncHistory(false);   // record first scene
         if (editMode) attachDrag();
       });
